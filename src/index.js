@@ -5,7 +5,6 @@ import App from './components/App';
 console.log('***INSIDE src/index.js')
 
 reactDom.render(
-	<App initialContests={window.initialData.contests}/>,
+	<App initialData={window.initialData}/>,
 	document.getElementById('root')
 	);
-

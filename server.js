@@ -13,18 +13,18 @@ app.set("view engine", "ejs");
 // var serverRender = require('./serverRender');
 import serverRender from './serverRender';
 
-app.get('/', (req, res) => {
-	serverRender().then(({initialMarkup, initialData})=>{
-		console.log("***INSIDE views/index.ejs")
-		res.render("index", {
-			initialMarkup, initialData
-			});				//index.ejs in views folder
-	}).catch(console.error);
+app.get(['/', '/contest/:contestId'], (req, res) => {
+    serverRender(req.params.contestId).then(({initialMarkup, initialData}) => {
+        console.log("***INSIDE views/index.ejs")
+        res.render("index", {
+            initialMarkup, initialData
+        });				//index.ejs in views folder
+    }).catch(console.error);
 });
 
 app.use('/api', apiRouter);
 app.use(express.static('public'));
 
-app.listen(config.port, config.host , ()=>{
-	console.log("Listenening on " + config.port + config.host + config.serverUrl);
+app.listen(8080, config.host, () => {
+    console.log("Listenening on " + 8080 + ' localhost');
 });
